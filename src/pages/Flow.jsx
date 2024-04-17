@@ -8,7 +8,8 @@ import ReactFlow, {
   NodeToolbar,
   addEdge,
 } from 'reactflow';
- 
+import axios from 'axios';
+
 import 'reactflow/dist/style.css';
 import './css/Flow.css';
 
@@ -150,13 +151,20 @@ const updateNodeInfo = (newName, newOption, newDescription) => {
     setNodes(updatedNodes);
   }
 };
-  
+const handleSave = async () => {
+  try {
+    const response = await axios.post('http://localhost:3000/flow', { nodes, edges });
+    console.log('Veriler başarıyla kaydedildi:', response.data);
+  } catch (error) {
+    console.error('Verileri kaydetme hatası:', error);
+  }
+};
 return (
   <div style={{ width: '100vw', height: '100vh' }} onClick={handleOutsideClick}>
     <div className='tools'>
       <button className='btn' onClick={addNode}>Node Ekle</button>
       <button className='btn' onClick={deleteNode}>Sil</button>
-      <button className='btn'>Kaydet</button>
+      <button className='btn' onClick={handleSave}>Kaydet</button>
      <select className='dropdown' value={selectedOption} onChange={handeleChangeDropdown}>
       <option value="İzin Talebi">İzin Talebi</option>
       <option value="Eğitim Talebi"> Eğitim Talebi</option>

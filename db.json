@@ -1,0 +1,87 @@
+{
+  "flow": [
+    {
+      "id": "6c79",
+      "nodes": [
+        {
+          "id": "1",
+          "position": {
+            "x": 347,
+            "y": 79
+          },
+          "data": {
+            "label": "Başla",
+            "unit": "İzin talebi",
+            "toDo": "IT Destek 2"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 347,
+            "y": 79
+          },
+          "dragging": false
+        },
+        {
+          "id": "3",
+          "position": {
+            "x": 351,
+            "y": 180
+          },
+          "data": {
+            "label": "Destek",
+            "unit": "İzin talebi",
+            "toDo": "IT Destek 2"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 351,
+            "y": 180
+          },
+          "dragging": false
+        },
+        {
+          "id": "4",
+          "position": {
+            "x": 327,
+            "y": 279
+          },
+          "data": {
+            "label": "Bitir",
+            "unit": "İzin talebi",
+            "toDo": "IT Destek 2"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": true,
+          "positionAbsolute": {
+            "x": 327,
+            "y": 279
+          },
+          "dragging": false
+        }
+      ],
+      "edges": [
+        {
+          "source": "1",
+          "sourceHandle": null,
+          "target": "3",
+          "targetHandle": null,
+          "id": "reactflow__edge-1-3",
+          "animated": true
+        },
+        {
+          "source": "3",
+          "sourceHandle": null,
+          "target": "4",
+          "targetHandle": null,
+          "id": "reactflow__edge-3-4",
+          "animated": true
+        }
+      ]
+    }
+  ]
+}
