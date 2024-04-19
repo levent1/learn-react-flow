@@ -16,8 +16,29 @@
   background-color: blue;
 }
 
+.info {
+  background-image: linear-gradient(to bottom, #6F95C2, #1B58A3);
+  height: 80%;
+  z-index: 1000;
+  width: 25%;
+  top: 0;
+  right: 0;
+
+}
+
+.info-edge {
+  background-image: linear-gradient(to bottom, #6F95C2, #1B58A3);
+  height: 80%;
+  z-index: 1000;
+  width: 25%;
+  top: 0;
+  right: 0;
+
+}
+
 .infoblock {
-  width: 150px;
+  margin: 10px;
+  width: 90%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -34,8 +55,8 @@ select {
 }
 
 .infoblock-edge {
-  border-radius: 30px;
-  width: 150px;
+  margin: 10px;
+  width: 90%;
   height: auto;
   display: flex;
   flex-direction: column;

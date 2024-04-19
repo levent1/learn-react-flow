@@ -1,253 +1,39 @@
 {
   "flow": [
     {
-      "id": "632b",
-      "selectedOptionGeneral": "Avans Talebi",
-      "nodes": [
-        {
-          "id": "1",
-          "position": {
-            "x": 344,
-            "y": 5.400000000000006
-          },
-          "data": {
-            "label": "Başla",
-            "unit": "Muhasebe",
-            "toDo": "Avans Başlangıç"
-          },
-          "width": 150,
-          "height": 40,
-          "selected": false,
-          "positionAbsolute": {
-            "x": 344,
-            "y": 5.400000000000006
-          },
-          "dragging": false
-        },
-        {
-          "id": "2",
-          "position": {
-            "x": 364,
-            "y": 136
-          },
-          "data": {
-            "label": "Avans",
-            "unit": "Muhasebe",
-            "toDo": "Avans Onay"
-          },
-          "width": 150,
-          "height": 40,
-          "selected": false,
-          "positionAbsolute": {
-            "x": 364,
-            "y": 136
-          },
-          "dragging": false
-        },
-        {
-          "id": "3",
-          "position": {
-            "x": 333,
-            "y": 246.99999999999997
-          },
-          "data": {
-            "label": "Onay",
-            "unit": "Muhasebe",
-            "toDo": "Avans Onay"
-          },
-          "width": 150,
-          "height": 40,
-          "selected": false,
-          "positionAbsolute": {
-            "x": 333,
-            "y": 246.99999999999997
-          },
-          "dragging": false
-        },
-        {
-          "id": "4",
-          "position": {
-            "x": 526,
-            "y": 246.99999999999997
-          },
-          "data": {
-            "label": "Red",
-            "unit": "Muhasebe",
-            "toDo": "Avans Red"
-          },
-          "width": 150,
-          "height": 40,
-          "selected": false,
-          "positionAbsolute": {
-            "x": 526,
-            "y": 246.99999999999997
-          },
-          "dragging": false
-        },
-        {
-          "id": "6",
-          "position": {
-            "x": 331,
-            "y": 342
-          },
-          "data": {
-            "label": "Bitir",
-            "unit": "Muhasebe",
-            "toDo": "Avans Sonuç"
-          },
-          "width": 150,
-          "height": 40,
-          "selected": false,
-          "positionAbsolute": {
-            "x": 331,
-            "y": 342
-          },
-          "dragging": false
-        }
-      ],
-      "edges": [
-        {
-          "id": "e1-2",
-          "source": "1",
-          "target": "2",
-          "animated": true
-        },
-        {
-          "source": "2",
-          "sourceHandle": null,
-          "target": "3",
-          "targetHandle": null,
-          "id": "reactflow__edge-2-3",
-          "animated": true,
-          "selected": false,
-          "data": {
-            "state": "avans < maas / 2"
-          }
-        },
-        {
-          "source": "3",
-          "sourceHandle": null,
-          "target": "6",
-          "targetHandle": null,
-          "id": "reactflow__edge-3-6",
-          "animated": true
-        },
-        {
-          "source": "2",
-          "sourceHandle": null,
-          "target": "4",
-          "targetHandle": null,
-          "id": "reactflow__edge-2-4",
-          "animated": true,
-          "selected": true,
-          "data": {
-            "state": "avans >= maas / 2"
-          }
-        }
-      ]
-    },
-    {
-      "id": "21e5",
+      "id": "6f3c",
       "selectedOptionGeneral": "İzin Talebi",
       "nodes": [
         {
           "id": "1",
           "position": {
-            "x": 295,
-            "y": 49.19999999999999
+            "x": 0,
+            "y": 0
           },
           "data": {
             "label": "Başlangıç",
-            "unit": "İnsan Kaynakları",
-            "toDo": "5 gün izin"
+            "unit": "İzin talebi",
+            "toDo": "Test"
           },
           "width": 150,
           "height": 40,
           "selected": false,
-          "positionAbsolute": {
-            "x": 295,
-            "y": 49.19999999999999
-          },
           "dragging": false
         },
         {
           "id": "2",
           "position": {
-            "x": 294,
-            "y": 149
+            "x": 0,
+            "y": 100
           },
           "data": {
-            "label": "İK Birim",
-            "unit": "İnsan Kaynakları",
-            "toDo": "5 gün izin"
+            "label": "Bitiş",
+            "unit": "İzin talebi",
+            "toDo": "Test"
           },
           "width": 150,
           "height": 40,
           "selected": false,
-          "positionAbsolute": {
-            "x": 294,
-            "y": 149
-          },
-          "dragging": false
-        },
-        {
-          "id": "4",
-          "position": {
-            "x": 252,
-            "y": 262
-          },
-          "data": {
-            "label": "Onay",
-            "unit": "İnsan Kaynakları",
-            "toDo": "Onay / Red"
-          },
-          "width": 150,
-          "height": 40,
-          "selected": false,
-          "positionAbsolute": {
-            "x": 252,
-            "y": 262
-          },
-          "dragging": false
-        },
-        {
-          "id": "5",
-          "position": {
-            "x": 499,
-            "y": 254.40000000000003
-          },
-          "data": {
-            "label": "Red",
-            "unit": "İnsan Kaynakları",
-            "toDo": "Onay / Red"
-          },
-          "width": 150,
-          "height": 40,
-          "selected": false,
-          "positionAbsolute": {
-            "x": 499,
-            "y": 254.40000000000003
-          },
-          "dragging": false
-        },
-        {
-          "id": "7",
-          "position": {
-            "x": 334,
-            "y": 393
-          },
-          "data": {
-            "label": "Bitir",
-            "unit": "İnsan Kaynakları",
-            "toDo": "Onay / Red"
-          },
-          "width": 150,
-          "height": 40,
-          "selected": true,
-          "positionAbsolute": {
-            "x": 334,
-            "y": 393
-          },
           "dragging": false
         }
       ],
@@ -256,55 +42,11 @@
           "id": "e1-2",
           "source": "1",
           "target": "2",
-          "animated": true
-        },
-        {
-          "source": "2",
-          "sourceHandle": null,
-          "target": "3",
-          "targetHandle": null,
-          "id": "reactflow__edge-2-3",
-          "animated": true
-        },
-        {
-          "source": "2",
-          "sourceHandle": null,
-          "target": "4",
-          "targetHandle": null,
-          "id": "reactflow__edge-2-4",
           "animated": true,
-          "selected": false,
+          "selected": true,
           "data": {
-            "state": "izin <= izinhak"
+            "state": "a > 50"
           }
-        },
-        {
-          "source": "2",
-          "sourceHandle": null,
-          "target": "5",
-          "targetHandle": null,
-          "id": "reactflow__edge-2-5",
-          "animated": true,
-          "selected": false,
-          "data": {
-            "state": "izin > izinhak"
-          }
-        },
-        {
-          "source": "4",
-          "sourceHandle": null,
-          "target": "7",
-          "targetHandle": null,
-          "id": "reactflow__edge-4-7",
-          "animated": true
-        },
-        {
-          "source": "5",
-          "sourceHandle": null,
-          "target": "7",
-          "targetHandle": null,
-          "id": "reactflow__edge-5-7",
-          "animated": true
         }
       ]
     }

@@ -15,8 +15,8 @@ import './css/Flow.css';
 
 
 const initialNodes = [
-  { id: '1', position: { x: 0, y: 0 }, data: { label: 'Kullanıcı Başlangıcı' } },
-  { id: '2', position: { x: 0, y: 100 }, data: { label: '2' } },
+  { id: '1', position: { x: 0, y: 0 }, data: { label: 'Başlangıç' } },
+  { id: '2', position: { x: 0, y: 100 }, data: { label: 'Bitiş' } },
 ];
 
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2', animated: true }];
@@ -67,11 +67,13 @@ export default function App() {
 
   const handleNodeClick = (event, node) => {
     setSelectedNode(node);
+    setInfoBlockVisible(true);
     console.log('Tıklanan Düğüm:', node);
   };
 
   const handleEdgeClick = (event, edge) => {
     setSelectedEdge(edge);
+    setInfoEdgeBlockVisible(true);
     console.log('Tıklanan Bağlantı:', edge);
   };
 
@@ -222,19 +224,21 @@ export default function App() {
         onNodeClick={(event, node) => handleNodeClick(event, node)}
         onEdgeClick={(event, edge) => handleEdgeClick(event, edge)}
         onNodeDoubleClick={(event, node) => handeleNodeDoubleClick(event, node)}
-        onEdgeDoubleClick={(event, edge) => handleEdgeIfStatementDoubleClick(event, edge)} // Değişiklik burada
+        onEdgeDoubleClick={(event, edge) => handleEdgeIfStatementDoubleClick(event, edge)}
       >
-        <div style={{ position: 'relative' }}>
+        <div className='info' style={{ position: 'absolute', display: infoBlockVisible ? 'block' : 'none' }}>
           {nodes.map(node => (
-            <div key={node.id} style={{ position: 'absolute', left: node.position.x + node.width / 2, top: node.position.y + node.height / 2 }}>
-              {node.id === selectedNode?.id && infoBlockVisible && (
-                <div className='infoblock' style={{ position: 'absolute', top: 50, left: '100%', marginLeft: 10 }} ref={infoBlockRef}>
+            <div key={node.id} style={{}}>
+              {node.id === selectedNode?.id && (
+                <div className='infoblock'>
+                  <label >İsim: </label>
                   <input
                     type="text"
                     value={nodeName}
                     onChange={handleNodeNameChange}
                     placeholder='Noda isim ver'
                   />
+                  <label >İlgili Birim: </label>
                   <select
                     className='active_unit'
                     value={selectedOption}
@@ -244,6 +248,7 @@ export default function App() {
                     <option value='Muhasebe'>Muhasebe</option>
                     <option value='İnsan Kaynakları'>İnsan kaynakları</option>
                   </select>
+                  <label >İlgili Not(Var ise): </label>
                   <textarea
                     name="text-area"
                     placeholder='Yapılacak işlem Açıklaması ekle'
@@ -255,29 +260,16 @@ export default function App() {
             </div>
           ))}
         </div>
-        <div style={{ position: 'relative' }}>
+
+        <div className='info-edge' style={{ position: 'absolute', display: infoEdgeBlockVisible ? 'block' : 'none' }}>
           {edges.map(edge => {
             const selectedNode = nodes.find(node => node.id === edge.source);
             if (!selectedNode) return null; // Eğer kaynak düğüm bulunamazsa, işlemi durdur
             return (
-              <div key={edge.id} style={{
-                position: 'absolute',
-                left: selectedNode.position.x + edge.width / 2,
-                top: selectedNode.position.y + edge.height / 2
-              }}>
-                {edge.id === selectedEdge?.id && infoEdgeBlockVisible && (
-                  <div className='infoblock-edge' style={{
-                    position: 'absolute',
-                    top: selectedNode.position.y + selectedNode.height + 10, // Seçilen düğümün altından başlaması için
-                    left: selectedNode.position.x + 100, // Seçilen düğümün pozisyonuna göre dikey ayar
-                    width: selectedNode.width * 1.5, // Seçilen düğümün genişliğinin 1.5 katı
-                    height: selectedNode.height * 1.5, // Seçilen düğümün yüksekliğinin 1.5 katı
-                    padding: 10, // Kenar boşluğu ekleyin
-                    boxSizing: 'border-box', // Padding'i hesaba katarak boyutu ayarlamak için
-                    display: 'flex', // İçeriğin yatay ve dikey hizalamasını ayarlamak için
-                    alignItems: 'center', // İçeriği dikey olarak hizala
-
-                  }} ref={infoBlockEdgeRef}>
+              <div key={edge.id} >
+                {edge.id === selectedEdge?.id && (
+                  <div className='infoblock-edge' ref={infoBlockEdgeRef}>
+                    <label >Koşulu Belirleyiniz: </label>
                     <input
                       type="text"
                       value={nodeIfStatement}
@@ -295,7 +287,9 @@ export default function App() {
         <Background variant="dots" gap={12} size={1} />
         <NodeToolbar />
       </ReactFlow>
+
     </div>
   );
+
 
 }
