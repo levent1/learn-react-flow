@@ -1,5 +1,6 @@
 import { useCallback, useState, useEffect, useRef } from 'react';
 import ReactFlow, {
+  ReactFlowProvider,
   MiniMap,
   Controls,
   Background,
@@ -9,14 +10,14 @@ import ReactFlow, {
   addEdge,
 } from 'reactflow';
 import axios from 'axios';
-
 import 'reactflow/dist/style.css';
 import './css/Flow.css';
 
 
+
 const initialNodes = [
-  { id: '1', position: { x: 0, y: 0 }, data: { label: 'Başlangıç' } },
-  { id: '2', position: { x: 0, y: 100 }, data: { label: 'Bitiş' } },
+  { id: '1',type:'input', position: { x: 0, y: 0 }, data: { label: 'Başlangıç' } },
+  { id: '2',type:'output', position: { x: 0, y: 100 }, data: { label: 'Onay' } },
 ];
 
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2', animated: true }];
@@ -36,7 +37,8 @@ export default function App() {
   const infoBlockRef = useRef(null);
   const infoBlockEdgeRef = useRef(null);
   const [nodeIfStatement, setNodeIfStatement] = useState('');
-
+  const reactFlowWrapper = useRef(null);
+  const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
   const onConnect = useCallback(
     (connection) => {
@@ -110,9 +112,7 @@ export default function App() {
     }
   }, [nodes, edges, selectedNode, selectedEdge]);
 
-  const handeleChangeDropdown = (event) => {
-    setSelectedOption(event.target.value);
-  };
+ 
   const handeleChangeDropdownGeneral = (event) => {
     setSelectedOptionGeneral(event.target.value);
   };
@@ -200,8 +200,71 @@ export default function App() {
       console.error('Verileri kaydetme hatası:', error);
     }
   };
+
+  // Sürükle Bırak ile yeni node oluşturma
+  let id = 0;
+  const getId = () => `dndnode_${id++}`;
+  const onDragOver = useCallback((event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+  }, []);
+
+  const onDrop = useCallback(
+    (event) => {
+      event.preventDefault();
+
+      const type = event.dataTransfer.getData('application/reactflow');
+
+      // check if the dropped element is valid
+      if (typeof type === 'undefined' || !type) {
+        return;
+      }
+
+      // reactFlowInstance.project was renamed to reactFlowInstance.screenToFlowPosition
+      // and you don't need to subtract the reactFlowBounds.left/top anymore
+      // details: https://reactflow.dev/whats-new/2023-11-10
+      const position = reactFlowInstance.screenToFlowPosition({
+        x: event.clientX,
+        y: event.clientY,
+      });
+      const newNode = {
+        id: getId(),
+        type,
+        position,
+        data: { label: `${type} node` },
+      };
+
+      setNodes((nds) => nds.concat(newNode));
+    },
+    [reactFlowInstance],
+  );
+
+  const onDragStart = (event, nodeType) => {
+    event.dataTransfer.setData('application/reactflow', nodeType);
+    event.dataTransfer.effectAllowed = 'move';
+  };
+
+
+
   return (
-    <div style={{ width: '100vw', height: '100vh' }} onClick={handleOutsideClick}>
+    <div className="dndflow" style={{ width: '100vw', height: '100vh' }} onClick={handleOutsideClick}>
+      <ReactFlowProvider>
+      <div className="reactflow-wrapper" ref={reactFlowWrapper}>
+      <aside>
+          
+          <div className="dndnode input" onDragStart={(event) => onDragStart(event, 'input')} draggable>
+            Başlangıç
+          </div>
+          <div className="dndnode" onDragStart={(event) => onDragStart(event, 'default')} draggable>
+            işlem 
+          </div>
+          <div className="dndnode output-reject" onDragStart={(event) => onDragStart(event, 'output')} draggable>
+            Red
+          </div>
+          <div className="dndnode output-accept" onDragStart={(event) => onDragStart(event, 'output')} draggable>
+            Onay
+          </div>
+        </aside> 
       <div className='tools'>
         <button className='btn' onClick={addNode}>Node Ekle</button>
         <button className='btn' onClick={deleteNode}>Sil</button>
@@ -213,7 +276,7 @@ export default function App() {
           <option value="Harcama Talebi">Harcama Talebi</option>
         </select>
       </div>
-
+      </div>  
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -225,6 +288,11 @@ export default function App() {
         onEdgeClick={(event, edge) => handleEdgeClick(event, edge)}
         onNodeDoubleClick={(event, node) => handeleNodeDoubleClick(event, node)}
         onEdgeDoubleClick={(event, edge) => handleEdgeIfStatementDoubleClick(event, edge)}
+        onInit={setReactFlowInstance}
+        onDrop={onDrop}
+        onDragOver={onDragOver}
+        fitView
+
       >
         <div className='info' style={{ position: 'absolute', display: infoBlockVisible ? 'block' : 'none' }}>
           {nodes.map(node => (
@@ -287,7 +355,7 @@ export default function App() {
         <Background variant="dots" gap={12} size={1} />
         <NodeToolbar />
       </ReactFlow>
-
+      </ReactFlowProvider>    
     </div>
   );
 
