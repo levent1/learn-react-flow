@@ -79,18 +79,21 @@ select {
   box-sizing: border-box;
   /* Padding'i hesaba katarak boyutu ayarlamak için */
 }
-*****************************************************
 .dndflow {
   display: flex;
   flex-direction: row; /* Düğüm akışının dikey olarak olmasını sağlar */
-
+  border: 5px solid pink;
+  background-color: red;
 }
 
 .dndflow aside {
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border-right: 1px solid #eee;
+  padding: 15px 10px;
+  font-size: 12px;
+  background: #fcfcfc;
+  width: 20%; /* Yana sıkıştırılmış kenarlık */
+  max-width: 250px;
+  background-color: #0041d0; /* Renk eklendi */
 }
 
 .dndflow .tools {
@@ -109,45 +112,21 @@ select {
   justify-content: center;
   align-items: center;
   cursor: grab;
-  color: white;
-  height: 25px;
-  width: 100px;
-  margin: 10px 10px; ;
-  background-color: #D3B1EE;
+  color: black;
 }
 
 .dndflow .dndnode.input {
-  
-  height: 25px;
-  width: 100px;
-  margin: 10px 10px; ;
-  color: white;
-  background-color: #FBBB89;
+  border-color: #0041d0;
+  color: black;
 }
 
-.dndflow .dndnode.output-reject {
-  
-  height: 50px;
-  width: 50px;
-  margin: 10px 10px; ;
-  color: white;
-  background-color:#FF9D92 ;
-  border-radius: 50%;
-}
-
-.dndflow .dndnode.output-accept {
-  
-  height: 50px;
-  width: 50px;
-  margin: 10px 10px; ;
-  color: white;
-  background-color:#8DA13B ;
-  border-radius: 50%;
+.dndflow .dndnode.output {
+  border-color: #ff0072;
+  color: black;
 }
 
 .dndflow .reactflow-wrapper {
   display: flex;
-  flex-direction: row;
   justify-content: space-between; /* Aracılar çubuğu ile akış arasında boşluk ekler */
 }
 

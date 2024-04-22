@@ -1,39 +1,106 @@
 {
   "flow": [
     {
-      "id": "6f3c",
+      "id": "8a6d",
       "selectedOptionGeneral": "İzin Talebi",
       "nodes": [
         {
-          "id": "1",
+          "id": "dndnode_4",
+          "type": "input",
           "position": {
-            "x": 0,
-            "y": 0
+            "x": -126.5,
+            "y": -66.66666793823242
           },
           "data": {
             "label": "Başlangıç",
             "unit": "İzin talebi",
-            "toDo": "Test"
+            "toDo": "izin talebi başlangıcı"
           },
           "width": 150,
-          "height": 40,
+          "height": 39,
           "selected": false,
+          "positionAbsolute": {
+            "x": -126.5,
+            "y": -66.66666793823242
+          },
           "dragging": false
         },
         {
-          "id": "2",
+          "id": "dndnode_5",
+          "type": "default",
           "position": {
-            "x": 0,
-            "y": 100
+            "x": -125.5,
+            "y": 12.333332061767578
           },
           "data": {
-            "label": "Bitiş",
+            "label": "yönetici onayı",
             "unit": "İzin talebi",
-            "toDo": "Test"
+            "toDo": "izin talebi başlangıcı"
           },
           "width": 150,
-          "height": 40,
+          "height": 39,
           "selected": false,
+          "positionAbsolute": {
+            "x": -125.5,
+            "y": 12.333332061767578
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_6",
+          "type": "output",
+          "position": {
+            "x": -197.5,
+            "y": 93.33333206176758
+          },
+          "data": {
+            "label": "output node"
+          },
+          "width": 150,
+          "height": 39,
+          "selected": false,
+          "positionAbsolute": {
+            "x": -197.5,
+            "y": 93.33333206176758
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_7",
+          "type": "output",
+          "position": {
+            "x": -31.109762354026742,
+            "y": 93.40783597331003
+          },
+          "data": {
+            "label": "output node"
+          },
+          "width": 150,
+          "height": 39,
+          "selected": false,
+          "positionAbsolute": {
+            "x": -31.109762354026742,
+            "y": 93.40783597331003
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_8",
+          "type": "default",
+          "position": {
+            "x": 121.39023764597326,
+            "y": 93.40783597331003
+          },
+          "data": {
+            "label": "default node"
+          },
+          "width": 150,
+          "height": 39,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 121.39023764597326,
+            "y": 93.40783597331003
+          },
           "dragging": false
         }
       ],
@@ -42,10 +109,46 @@
           "id": "e1-2",
           "source": "1",
           "target": "2",
+          "animated": true
+        },
+        {
+          "source": "dndnode_5",
+          "sourceHandle": null,
+          "target": "dndnode_6",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_5-dndnode_6",
+          "animated": true,
+          "selected": false,
+          "data": {
+            "state": "onaylarsa"
+          }
+        },
+        {
+          "source": "dndnode_4",
+          "sourceHandle": null,
+          "target": "dndnode_5",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_4-dndnode_5",
+          "animated": true
+        },
+        {
+          "source": "dndnode_5",
+          "sourceHandle": null,
+          "target": "dndnode_7",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_5-dndnode_7",
+          "animated": true
+        },
+        {
+          "source": "dndnode_5",
+          "sourceHandle": null,
+          "target": "dndnode_8",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_5-dndnode_8",
           "animated": true,
           "selected": true,
           "data": {
-            "state": "a > 50"
+            "state": "yönlendirirse"
           }
         }
       ]
