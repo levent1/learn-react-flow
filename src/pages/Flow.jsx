@@ -15,12 +15,9 @@ import './css/Flow.css';
 
 
 
-const initialNodes = [
-  { id: '1',type:'input', position: { x: 0, y: 0 }, data: { label: 'Başlangıç' } },
-  { id: '2',type:'output', position: { x: 0, y: 100 }, data: { label: 'Onay' } },
-];
+const initialNodes = []
 
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2', animated: true }];
+const initialEdges = [];
 
 export default function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -57,7 +54,7 @@ export default function App() {
     });
   }, [edges, setEdges]);
 
-  const addNode = useCallback(() => {
+  /*const addNode = useCallback(() => {
     setidCreate(idCreate => idCreate + 1);
     const newNode = {
       id: String(idCreate),
@@ -66,7 +63,7 @@ export default function App() {
     };
     setNodes(prevNodes => [...prevNodes, newNode]);
   }, [idCreate, setNodes]);
-
+*/
   const handleNodeClick = (event, node) => {
     setSelectedNode(node);
     setInfoBlockVisible(true);
@@ -214,7 +211,8 @@ export default function App() {
       event.preventDefault();
 
       const type = event.dataTransfer.getData('application/reactflow');
-
+      const nodeClass = event.dataTransfer.getData('application/nodeclass'); // Sürüklenen öğenin sınıfını al
+      const nodelabel = event.dataTransfer.getData('application/nodelabel');
       // check if the dropped element is valid
       if (typeof type === 'undefined' || !type) {
         return;
@@ -227,11 +225,50 @@ export default function App() {
         x: event.clientX,
         y: event.clientY,
       });
+
+      let backgroundColor = 'white';
+      let borderRadius ='0%'
+      let width;
+      let height;
+      let paddingTop;
+      
+
+    // Check node class and set background color accordingly
+    switch (nodeClass) {
+      case 'dndnode input':
+        backgroundColor = '#FBBB89';
+        break;
+      case 'dndnode':
+        backgroundColor = '#D3B1EE';
+        break;
+      case 'dndnode output-reject':
+        backgroundColor = '#FF9D92';
+        borderRadius ='50%';
+        width ='60px';
+        height= '60px';
+        paddingTop="17px"
+        break;
+      case 'dndnode output-accept':
+        backgroundColor = '#8DA13B';
+        borderRadius ='50%';
+        width ='60px';
+        height= '60px';
+        paddingTop="17px"
+
+        break;
+      default:
+        backgroundColor = '#D3B1EE';
+        break;
+    }
+
+
+      
       const newNode = {
         id: getId(),
         type,
         position,
-        data: { label: `${type} node` },
+        data: { label: `${nodelabel} ` },
+        style: { backgroundColor ,borderRadius,width,height,paddingTop}
       };
 
       setNodes((nds) => nds.concat(newNode));
@@ -252,21 +289,62 @@ export default function App() {
       <div className="reactflow-wrapper" ref={reactFlowWrapper}>
       <aside>
           
-          <div className="dndnode input" onDragStart={(event) => onDragStart(event, 'input')} draggable>
-            Başlangıç
-          </div>
-          <div className="dndnode" onDragStart={(event) => onDragStart(event, 'default')} draggable>
-            işlem 
-          </div>
-          <div className="dndnode output-reject" onDragStart={(event) => onDragStart(event, 'output')} draggable>
-            Red
-          </div>
-          <div className="dndnode output-accept" onDragStart={(event) => onDragStart(event, 'output')} draggable>
-            Onay
-          </div>
+      <div
+  className="dndnode input"
+  onDragStart={(event) => {
+    event.dataTransfer.setData('application/reactflow', 'input');
+    event.dataTransfer.setData('application/nodeclass', 'dndnode input');
+    event.dataTransfer.setData('application/nodelabel', 'Başlangıç');
+    onDragStart(event, 'input');
+  }}
+  draggable
+  data-nodeclass="input" // Bu satırı ekleyerek nodeClass verisini taşıyoruz
+>
+  Başlangıç
+</div>
+<div
+  className="dndnode"
+  onDragStart={(event) => {
+    event.dataTransfer.setData('application/reactflow', 'default');
+    event.dataTransfer.setData('application/nodeclass', 'dndnode');
+    event.dataTransfer.setData('application/nodelabel', 'İşlem');
+    onDragStart(event, 'default');
+  }}
+  draggable
+  data-nodeclass="default" // Bu satırı ekleyerek nodeClass verisini taşıyoruz
+>
+  İşlem
+</div>
+<div
+  className="dndnode output-reject"
+  onDragStart={(event) => {
+    event.dataTransfer.setData('application/reactflow', 'output');
+    event.dataTransfer.setData('application/nodeclass', 'dndnode output-reject');
+    event.dataTransfer.setData('application/nodelabel', 'Red');
+    onDragStart(event, 'output');
+  }}
+  draggable
+  data-nodeclass="output-reject" // Bu satırı ekleyerek nodeClass verisini taşıyoruz
+>
+  Red
+</div>
+<div
+  className="dndnode output-accept"
+  onDragStart={(event) => {
+    event.dataTransfer.setData('application/reactflow', 'output');
+    event.dataTransfer.setData('application/nodeclass', 'dndnode output-accept');
+    event.dataTransfer.setData('application/nodelabel', 'Onay');
+    onDragStart(event, 'output');
+  }}
+  draggable
+  data-nodeclass="output-accept" // Bu satırı ekleyerek nodeClass verisini taşıyoruz
+>
+  Onay
+</div>
+
         </aside> 
       <div className='tools'>
-        <button className='btn' onClick={addNode}>Node Ekle</button>
+       {/* <button className='btn' onClick={addNode}>Node Ekle</button> */}
         <button className='btn' onClick={deleteNode}>Sil</button>
         <button className='btn' onClick={handleSave}>Kaydet</button>
         <select className='dropdown' value={selectedOptionGeneral} onChange={handeleChangeDropdownGeneral}>
