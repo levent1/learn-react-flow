@@ -9,7 +9,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="home" element={<Home />} />
+        <Route path="/" element={<Flow/>} />
         <Route path="flow" element={<Flow/>} />
         <Route path='requestpersonal' element={<PersonelRequest/>}/>
         <Route path='shape' element={<Shape/>}/>
