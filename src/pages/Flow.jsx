@@ -22,7 +22,7 @@ const initialEdges = [];
 export default function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const [idCreate, setidCreate] = useState(3);
+  /*const [idCreate, setidCreate] = useState(3);*/
   const [selectedNode, setSelectedNode] = useState(null);
   const [selectedEdge, setSelectedEdge] = useState(null);
   const [selectedOptionGeneral, setSelectedOptionGeneral] = useState('İzin Talebi');
@@ -68,6 +68,9 @@ export default function App() {
     setSelectedNode(node);
     setInfoBlockVisible(true);
     console.log('Tıklanan Düğüm:', node);
+    console.log(node.data.label)
+    setNodeName(node.data.label);
+    setSelectedOption(node.data.unit)
   };
 
   const handleEdgeClick = (event, edge) => {
@@ -80,7 +83,7 @@ export default function App() {
     console.log('Çift Tıklanan Düğüm:', node);
     setSelectedNode(node);
     setInfoBlockVisible(true);
-    setNodeName(node.data.label);
+    
   };
   const handleEdgeIfStatementDoubleClick = (event, edge) => {
     console.log('Çift Tıklanan Bağlantı:', edge);
@@ -138,19 +141,29 @@ export default function App() {
   };
 
   const handleOutsideClick = (event) => {
-    if (infoBlockRef.current && !infoBlockRef.current.contains(event.target)) {
+    console.log("handleOutsideClick çalıştı");
+  
+    // infoBlockRef ve infoBlockEdgeRef içerisinde herhangi bir yerde tıklanıp tıklanmadığını kontrol et
+    if (
+      (infoBlockRef.current && !infoBlockRef.current.contains(event.target) && infoBlockVisible) ||
+      (infoBlockEdgeRef.current && !infoBlockEdgeRef.current.contains(event.target) && infoEdgeBlockVisible)
+    ) {
+      console.log("info block dışında bir yere tıklandı");
+      // infoBlockVisible ve infoEdgeBlockVisible durumlarını güncelle
       if (infoBlockVisible) {
-        updateNodeInfo(nodeName, selectedOption, taskDescription); // Node ismini güncelle
+       
+        updateNodeInfo(nodeName, selectedOption, taskDescription);
         setInfoBlockVisible(false);
+       
       }
-    }
-    if (infoBlockEdgeRef.current && !infoBlockEdgeRef.current.contains(event.target)) {
       if (infoEdgeBlockVisible) {
+        
         updateNodeIfStatementInfo(nodeIfStatement);
         setInfoEdgeBlockVisible(false);
       }
     }
   };
+  
 
   const updateNodeInfo = (newName, newOption, newDescription) => {
     if (selectedNode) { // selectedNode null değilse devam et
@@ -355,7 +368,7 @@ export default function App() {
         </select>
       </div>
       </div>  
-      <ReactFlow
+      <ReactFlow className='react-flow-css'
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
@@ -376,7 +389,7 @@ export default function App() {
           {nodes.map(node => (
             <div key={node.id} style={{}}>
               {node.id === selectedNode?.id && (
-                <div className='infoblock'>
+                <div className='infoblock' ref={infoBlockRef}>
                   <label >İsim: </label>
                   <input
                     type="text"
