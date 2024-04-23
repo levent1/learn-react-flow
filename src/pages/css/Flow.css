@@ -39,10 +39,11 @@
 .infoblock {
   margin: 10px;
   width: 90%;
-  height: auto;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   z-index: 1000;
+
 }
 
 .infoblock>input,
@@ -153,6 +154,10 @@ select {
 
 .dndflow .selectall {
   margin-top: 10px;
+}
+.react-flow__renderer{
+  height: 100px;
+
 }
 
 @media screen and (min-width: 768px) {
