@@ -166,6 +166,16 @@ select {
   margin-left: 10px ;
 }
 
+.react-flow__node.selected {
+  border: 2px solid red; /* Seçilen düğümün kenarını kırmızı olarak belirginleştirir */
+}
+
+.react-flow__edge.selected {
+  stroke: red; /* Seçilen kenarın rengini kırmızı olarak belirginleştirir */
+  stroke-width: 3px; /* Seçilen kenarın kalınlığını arttırır */
+}
+
+
 @media screen and (min-width: 768px) {
   .dndflow {
     flex-direction: row; /* Ekran genişliği 768 pikselden büyükse, düğüm akışının yatay olarak olmasını sağlar */

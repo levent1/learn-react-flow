@@ -64,26 +64,32 @@ export default function App() {
     setNodes(prevNodes => [...prevNodes, newNode]);
   }, [idCreate, setNodes]);
 */
-  const handleNodeClick = (event, node) => {
-    setSelectedNode(node);
-    setInfoBlockVisible(true);
-    setNodeName(node.data.label);
-    setSelectedOption(node.data.unit);
-    setTaskDescription(node.data.toDo || '');
-    console.log('Tıklanan Düğüm:', node);
-  };
 
-  const handeleNodeDoubleClick = (event, node) => {
-    setSelectedNode(node);
-    setInfoBlockVisible(true);
-    setNodeName(node.data.label);
-    setSelectedOption(node.data.unit);
-    setTaskDescription(node.data.toDo || '');
-    console.log('Tıklanan Düğüm:', node);
-    
-  };
+const handeleNodeDoubleClick = (event, node) => {
+  setSelectedNode(node);
+  setInfoBlockVisible(true);
+  setNodeName(node.data.label);
+  setSelectedOption(node.data.unit);
+  setTaskDescription(node.data.toDo || '');
+  console.log('Tıklanan Düğüm:', node);
+  
+};
 
-    const handleEdgeClick = (event, edge) => {
+// Tıklanan düğümü işaretle
+const handleNodeClick = (event, node) => {
+  setSelectedNode(node);
+  setInfoBlockVisible(true);
+  setNodeName(node.data.label);
+  setSelectedOption(node.data.unit);
+  setTaskDescription(node.data.toDo || '');
+  console.log('Tıklanan Düğüm:', node);
+  
+  // Seçilen düğüme "selected" sınıfını ekle
+  event.target.classList.add('selected');
+};
+
+// Tıklanan kenarı işaretle
+const handleEdgeClick = (event, edge) => {
   if (selectedEdge && selectedEdge.id === edge.id) {
     // Zaten seçili edge'e tıklandıysa, seçimi iptal et
     setSelectedEdge(null);
@@ -97,6 +103,9 @@ export default function App() {
     setInfoBlockVisible(false); // Düğüm bilgi bloğunu gizle
     console.log('Tıklanan Bağlantı:', edge);
   }
+  
+  // Seçilen kenara "selected" sınıfını ekle
+  event.target.classList.add('selected');
 };
 
 const handleEdgeIfStatementDoubleClick = (event, edge) => {
