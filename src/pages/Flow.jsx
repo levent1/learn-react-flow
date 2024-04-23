@@ -301,7 +301,7 @@ export default function App() {
       <ReactFlowProvider>
       <div className="reactflow-wrapper" ref={reactFlowWrapper}>
       <aside>
-          
+       <img src="src\pages\logo.png" alt="Bilge Adam Teknoloji Logo" className='logo'/>  
       <div
   className="dndnode input"
   onDragStart={(event) => {
