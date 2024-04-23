@@ -67,29 +67,53 @@ export default function App() {
   const handleNodeClick = (event, node) => {
     setSelectedNode(node);
     setInfoBlockVisible(true);
-    console.log('Tıklanan Düğüm:', node);
-    console.log(node.data.label)
     setNodeName(node.data.label);
-    setSelectedOption(node.data.unit)
-  };
-
-  const handleEdgeClick = (event, edge) => {
-    setSelectedEdge(edge);
-    setInfoEdgeBlockVisible(true);
-    console.log('Tıklanan Bağlantı:', edge);
+    setSelectedOption(node.data.unit);
+    setTaskDescription(node.data.toDo || '');
+    console.log('Tıklanan Düğüm:', node);
   };
 
   const handeleNodeDoubleClick = (event, node) => {
-    console.log('Çift Tıklanan Düğüm:', node);
     setSelectedNode(node);
     setInfoBlockVisible(true);
+    setNodeName(node.data.label);
+    setSelectedOption(node.data.unit);
+    setTaskDescription(node.data.toDo || '');
+    console.log('Tıklanan Düğüm:', node);
     
   };
-  const handleEdgeIfStatementDoubleClick = (event, edge) => {
-    console.log('Çift Tıklanan Bağlantı:', edge);
+
+    const handleEdgeClick = (event, edge) => {
+  if (selectedEdge && selectedEdge.id === edge.id) {
+    // Zaten seçili edge'e tıklandıysa, seçimi iptal et
+    setSelectedEdge(null);
+    setInfoEdgeBlockVisible(false);
+  } else {
+    // Başka bir edge'e tıklandıysa, yeni edge'i seç ve diğer seçimleri temizle
     setSelectedEdge(edge);
     setInfoEdgeBlockVisible(true);
-  };
+    setNodeIfStatement(edge.data?.state || '');
+    setSelectedNode(null); // Seçili düğümü temizle
+    setInfoBlockVisible(false); // Düğüm bilgi bloğunu gizle
+    console.log('Tıklanan Bağlantı:', edge);
+  }
+};
+
+const handleEdgeIfStatementDoubleClick = (event, edge) => {
+  if (selectedEdge && selectedEdge.id === edge.id) {
+    // Zaten seçili edge'e çift tıklandıysa, seçimi iptal et
+    setSelectedEdge(null);
+    setInfoEdgeBlockVisible(false);
+  } else {
+    // Başka bir edge'e çift tıklandıysa, yeni edge'i seç ve diğer seçimleri temizle
+    setSelectedEdge(edge);
+    setInfoEdgeBlockVisible(true);
+    setNodeIfStatement(edge.data?.state || '');
+    setSelectedNode(null); // Seçili düğümü temizle
+    setInfoBlockVisible(false); // Düğüm bilgi bloğunu gizle
+    console.log('Çift Tıklanan Bağlantı:', edge);
+  }
+};
   const deleteNode = useCallback(() => {
     if (selectedNode) {
       const nodeId = selectedNode.id;
@@ -403,6 +427,7 @@ export default function App() {
                     value={selectedOption}
                     onChange={handleSelectedOptionChange}
                   >
+                    <option value="">Seçiniz</option>
                     <option value='Yazılım Gelişimi'>Yazılım Geliştirme</option>
                     <option value='Muhasebe'>Muhasebe</option>
                     <option value='İnsan Kaynakları'>İnsan kaynakları</option>
@@ -431,7 +456,7 @@ export default function App() {
                     <label >Koşulu Belirleyiniz: </label>
                     <input
                       type="text"
-                      value={nodeIfStatement}
+                      value={nodeIfStatement ? nodeIfStatement : ""}
                       onChange={handleNodeIfStatementChange}
                       placeholder='Koşulu Belirle'
                     />

@@ -1,154 +1,135 @@
 {
   "flow": [
     {
-      "id": "8a6d",
+      "id": "260b",
       "selectedOptionGeneral": "İzin Talebi",
       "nodes": [
         {
-          "id": "dndnode_4",
+          "id": "dndnode_0",
           "type": "input",
           "position": {
-            "x": -126.5,
-            "y": -66.66666793823242
+            "x": 27,
+            "y": 34
           },
           "data": {
-            "label": "Başlangıç",
-            "unit": "İzin talebi",
-            "toDo": "izin talebi başlangıcı"
+            "label": "Başlangıç ",
+            "unit": "Yazılım Gelişimi",
+            "toDo": "b"
+          },
+          "style": {
+            "backgroundColor": "#FBBB89",
+            "borderRadius": "0%"
           },
           "width": 150,
-          "height": 39,
+          "height": 40,
           "selected": false,
-          "positionAbsolute": {
-            "x": -126.5,
-            "y": -66.66666793823242
-          },
           "dragging": false
         },
         {
-          "id": "dndnode_5",
+          "id": "dndnode_1",
           "type": "default",
           "position": {
-            "x": -125.5,
-            "y": 12.333332061767578
+            "x": 65.25,
+            "y": 168.75
           },
           "data": {
-            "label": "yönetici onayı",
-            "unit": "İzin talebi",
-            "toDo": "izin talebi başlangıcı"
+            "label": "İşlem ",
+            "unit": "Yazılım Gelişimi",
+            "toDo": "i"
+          },
+          "style": {
+            "backgroundColor": "#D3B1EE",
+            "borderRadius": "0%"
           },
           "width": 150,
-          "height": 39,
+          "height": 40,
           "selected": false,
-          "positionAbsolute": {
-            "x": -125.5,
-            "y": 12.333332061767578
-          },
           "dragging": false
         },
         {
-          "id": "dndnode_6",
+          "id": "dndnode_2",
           "type": "output",
           "position": {
-            "x": -197.5,
-            "y": 93.33333206176758
+            "x": 229.75,
+            "y": 282.75
           },
           "data": {
-            "label": "output node"
+            "label": "Onay ",
+            "unit": "Yazılım Gelişimi",
+            "toDo": "o"
           },
-          "width": 150,
-          "height": 39,
-          "selected": false,
-          "positionAbsolute": {
-            "x": -197.5,
-            "y": 93.33333206176758
+          "style": {
+            "backgroundColor": "#8DA13B",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
           },
+          "width": 60,
+          "height": 60,
+          "selected": true,
           "dragging": false
         },
         {
-          "id": "dndnode_7",
+          "id": "dndnode_3",
           "type": "output",
           "position": {
-            "x": -31.109762354026742,
-            "y": 93.40783597331003
+            "x": 70.25,
+            "y": 278.75
           },
           "data": {
-            "label": "output node"
+            "label": "Red ",
+            "unit": "Yazılım Gelişimi",
+            "toDo": "r"
           },
-          "width": 150,
-          "height": 39,
+          "style": {
+            "backgroundColor": "#FF9D92",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
           "selected": false,
-          "positionAbsolute": {
-            "x": -31.109762354026742,
-            "y": 93.40783597331003
-          },
-          "dragging": false
-        },
-        {
-          "id": "dndnode_8",
-          "type": "default",
-          "position": {
-            "x": 121.39023764597326,
-            "y": 93.40783597331003
-          },
-          "data": {
-            "label": "default node"
-          },
-          "width": 150,
-          "height": 39,
-          "selected": false,
-          "positionAbsolute": {
-            "x": 121.39023764597326,
-            "y": 93.40783597331003
-          },
           "dragging": false
         }
       ],
       "edges": [
         {
-          "id": "e1-2",
-          "source": "1",
-          "target": "2",
-          "animated": true
-        },
-        {
-          "source": "dndnode_5",
+          "source": "dndnode_1",
           "sourceHandle": null,
-          "target": "dndnode_6",
+          "target": "dndnode_3",
           "targetHandle": null,
-          "id": "reactflow__edge-dndnode_5-dndnode_6",
+          "id": "reactflow__edge-dndnode_1-dndnode_3",
           "animated": true,
           "selected": false,
           "data": {
-            "state": "onaylarsa"
+            "state": "i-r"
           }
         },
         {
-          "source": "dndnode_4",
+          "source": "dndnode_1",
           "sourceHandle": null,
-          "target": "dndnode_5",
+          "target": "dndnode_2",
           "targetHandle": null,
-          "id": "reactflow__edge-dndnode_4-dndnode_5",
-          "animated": true
-        },
-        {
-          "source": "dndnode_5",
-          "sourceHandle": null,
-          "target": "dndnode_7",
-          "targetHandle": null,
-          "id": "reactflow__edge-dndnode_5-dndnode_7",
-          "animated": true
-        },
-        {
-          "source": "dndnode_5",
-          "sourceHandle": null,
-          "target": "dndnode_8",
-          "targetHandle": null,
-          "id": "reactflow__edge-dndnode_5-dndnode_8",
+          "id": "reactflow__edge-dndnode_1-dndnode_2",
           "animated": true,
-          "selected": true,
+          "selected": false,
           "data": {
-            "state": "yönlendirirse"
+            "state": "i-o"
+          }
+        },
+        {
+          "source": "dndnode_0",
+          "sourceHandle": null,
+          "target": "dndnode_1",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_0-dndnode_1",
+          "animated": true,
+          "selected": false,
+          "data": {
+            "state": "b-i"
           }
         }
       ]
