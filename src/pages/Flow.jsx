@@ -83,6 +83,7 @@ export default function App() {
 
   };
 
+  // Tıklanan kenarı işaretle
   const handleEdgeClick = (event, edge) => {
     if (selectedEdge && selectedEdge.id === edge.id) {
       // Zaten seçili edge'e tıklandıysa, seçimi iptal et
@@ -97,6 +98,9 @@ export default function App() {
       setInfoBlockVisible(false); // Düğüm bilgi bloğunu gizle
       console.log('Tıklanan Bağlantı:', edge);
     }
+
+    // Seçilen kenara "selected" sınıfını ekle
+    event.target.classList.add('selected');
   };
 
   const handleEdgeIfStatementDoubleClick = (event, edge) => {

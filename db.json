@@ -1,20 +1,20 @@
 {
   "flow": [
     {
-      "id": "260b",
+      "id": "f7f7",
       "selectedOptionGeneral": "İzin Talebi",
       "nodes": [
         {
           "id": "dndnode_0",
           "type": "input",
           "position": {
-            "x": 27,
-            "y": 34
+            "x": -78.5,
+            "y": -87.5
           },
           "data": {
             "label": "Başlangıç ",
-            "unit": "Yazılım Gelişimi",
-            "toDo": "b"
+            "unit": "Muhasebe",
+            "toDo": "avans"
           },
           "style": {
             "backgroundColor": "#FBBB89",
@@ -23,19 +23,23 @@
           "width": 150,
           "height": 40,
           "selected": false,
+          "positionAbsolute": {
+            "x": -78.5,
+            "y": -87.5
+          },
           "dragging": false
         },
         {
           "id": "dndnode_1",
           "type": "default",
           "position": {
-            "x": 65.25,
-            "y": 168.75
+            "x": -77.75,
+            "y": 0.75
           },
           "data": {
             "label": "İşlem ",
-            "unit": "Yazılım Gelişimi",
-            "toDo": "i"
+            "unit": "Muhasebe",
+            "toDo": "2000"
           },
           "style": {
             "backgroundColor": "#D3B1EE",
@@ -50,37 +54,13 @@
           "id": "dndnode_2",
           "type": "output",
           "position": {
-            "x": 229.75,
-            "y": 282.75
-          },
-          "data": {
-            "label": "Onay ",
-            "unit": "Yazılım Gelişimi",
-            "toDo": "o"
-          },
-          "style": {
-            "backgroundColor": "#8DA13B",
-            "borderRadius": "50%",
-            "width": "60px",
-            "height": "60px",
-            "paddingTop": "17px"
-          },
-          "width": 60,
-          "height": 60,
-          "selected": true,
-          "dragging": false
-        },
-        {
-          "id": "dndnode_3",
-          "type": "output",
-          "position": {
-            "x": 70.25,
-            "y": 278.75
+            "x": 16.25,
+            "y": 89.25
           },
           "data": {
             "label": "Red ",
-            "unit": "Yazılım Gelişimi",
-            "toDo": "r"
+            "unit": "Muhasebe",
+            "toDo": ""
           },
           "style": {
             "backgroundColor": "#FF9D92",
@@ -91,7 +71,39 @@
           },
           "width": 60,
           "height": 60,
+          "selected": true,
+          "positionAbsolute": {
+            "x": 16.25,
+            "y": 89.25
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_3",
+          "type": "output",
+          "position": {
+            "x": -77.25,
+            "y": 88.25
+          },
+          "data": {
+            "label": "Onay ",
+            "unit": "Muhasebe",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#8DA13B",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
           "selected": false,
+          "positionAbsolute": {
+            "x": -77.25,
+            "y": 88.25
+          },
           "dragging": false
         }
       ],
@@ -105,7 +117,7 @@
           "animated": true,
           "selected": false,
           "data": {
-            "state": "i-r"
+            "state": "o k"
           }
         },
         {
@@ -117,7 +129,7 @@
           "animated": true,
           "selected": false,
           "data": {
-            "state": "i-o"
+            "state": "red k"
           }
         },
         {
@@ -129,7 +141,7 @@
           "animated": true,
           "selected": false,
           "data": {
-            "state": "b-i"
+            "state": "b i k"
           }
         }
       ]
