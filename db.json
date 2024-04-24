@@ -260,6 +260,540 @@
           "animated": true
         }
       ]
+    },
+    {
+      "id": "ad16",
+      "selectedOptionGeneral": "İzin Talebi",
+      "nodes": [
+        {
+          "id": "dndnode_0",
+          "type": "input",
+          "position": {
+            "x": -94,
+            "y": -133.5
+          },
+          "data": {
+            "label": "Başlangıç ",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#FBBB89",
+            "borderRadius": "0%"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "positionAbsolute": {
+            "x": -94,
+            "y": -133.5
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_1",
+          "type": "default",
+          "position": {
+            "x": -101.5,
+            "y": -64.5
+          },
+          "data": {
+            "label": "Birincil Yönetici",
+            "unit": "Yazılım Gelişimi",
+            "toDo": "Proje Onay"
+          },
+          "style": {
+            "backgroundColor": "#D3B1EE",
+            "borderRadius": "0%"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "positionAbsolute": {
+            "x": -101.5,
+            "y": -64.5
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_2",
+          "type": "output",
+          "position": {
+            "x": -3.5,
+            "y": 24.5
+          },
+          "data": {
+            "label": "Red ",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#FF9D92",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
+          "selected": false,
+          "positionAbsolute": {
+            "x": -3.5,
+            "y": 24.5
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_3",
+          "type": "output",
+          "position": {
+            "x": -104.5,
+            "y": 22
+          },
+          "data": {
+            "label": "Onay ",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#8DA13B",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
+          "selected": false,
+          "positionAbsolute": {
+            "x": -104.5,
+            "y": 22
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_4",
+          "type": "default",
+          "position": {
+            "x": 91.5,
+            "y": 24.5
+          },
+          "data": {
+            "label": "İkincil Yönetici",
+            "unit": "Yazılım Gelişimi",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#D3B1EE",
+            "borderRadius": "0%"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "dragging": false,
+          "positionAbsolute": {
+            "x": 91.5,
+            "y": 24.5
+          }
+        },
+        {
+          "id": "dndnode_5",
+          "type": "output",
+          "position": {
+            "x": 191,
+            "y": 100
+          },
+          "data": {
+            "label": "Red ",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#FF9D92",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 191,
+            "y": 100
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_6",
+          "type": "output",
+          "position": {
+            "x": 93.5,
+            "y": 100
+          },
+          "data": {
+            "label": "Onay ",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#8DA13B",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 93.5,
+            "y": 100
+          },
+          "dragging": false
+        }
+      ],
+      "edges": [
+        {
+          "source": "dndnode_0",
+          "sourceHandle": null,
+          "target": "dndnode_1",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_0-dndnode_1",
+          "animated": true
+        },
+        {
+          "source": "dndnode_1",
+          "sourceHandle": null,
+          "target": "dndnode_3",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_1-dndnode_3",
+          "animated": true,
+          "selected": false,
+          "data": {
+            "state": "maliyet < 100.000"
+          }
+        },
+        {
+          "source": "dndnode_1",
+          "sourceHandle": null,
+          "target": "dndnode_2",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_1-dndnode_2",
+          "animated": true,
+          "selected": false,
+          "data": {
+            "state": "maliyet < 100.000"
+          }
+        },
+        {
+          "source": "dndnode_1",
+          "sourceHandle": null,
+          "target": "dndnode_4",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_1-dndnode_4",
+          "animated": true
+        },
+        {
+          "source": "dndnode_4",
+          "sourceHandle": null,
+          "target": "dndnode_6",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_4-dndnode_6",
+          "animated": true,
+          "selected": false,
+          "data": {
+            "state": "maliyet < 150.000"
+          }
+        },
+        {
+          "source": "dndnode_4",
+          "sourceHandle": null,
+          "target": "dndnode_5",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_4-dndnode_5",
+          "animated": true,
+          "selected": false,
+          "data": {
+            "state": "maliyet >=150.000"
+          }
+        },
+        {
+          "source": "dndnode_4",
+          "sourceHandle": null,
+          "target": "dndnode_1",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_4-dndnode_1",
+          "animated": true,
+          "data": {
+            "state": ""
+          }
+        }
+      ]
+    },
+    {
+      "id": "5051",
+      "selectedOptionGeneral": "İzin Talebi",
+      "nodes": [
+        {
+          "id": "dndnode_0",
+          "type": "input",
+          "position": {
+            "x": -94,
+            "y": -133.5
+          },
+          "data": {
+            "label": "Başlangıç ",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#FBBB89",
+            "borderRadius": "0%"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "positionAbsolute": {
+            "x": -94,
+            "y": -133.5
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_1",
+          "type": "default",
+          "position": {
+            "x": -101.5,
+            "y": -64.5
+          },
+          "data": {
+            "label": "Birincil Yönetici",
+            "unit": "Yazılım Gelişimi",
+            "toDo": "Proje Onay"
+          },
+          "style": {
+            "backgroundColor": "#D3B1EE",
+            "borderRadius": "0%"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "positionAbsolute": {
+            "x": -101.5,
+            "y": -64.5
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_2",
+          "type": "output",
+          "position": {
+            "x": -16.5,
+            "y": 25
+          },
+          "data": {
+            "label": "Red ",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#FF9D92",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
+          "selected": false,
+          "positionAbsolute": {
+            "x": -16.5,
+            "y": 25
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_3",
+          "type": "output",
+          "position": {
+            "x": -108.5,
+            "y": 24
+          },
+          "data": {
+            "label": "Onay ",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#8DA13B",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
+          "selected": false,
+          "positionAbsolute": {
+            "x": -108.5,
+            "y": 24
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_4",
+          "type": "default",
+          "position": {
+            "x": 91.5,
+            "y": 24.5
+          },
+          "data": {
+            "label": "İkincil Yönetici",
+            "unit": "Yazılım Gelişimi",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#D3B1EE",
+            "borderRadius": "0%"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "dragging": false,
+          "positionAbsolute": {
+            "x": 91.5,
+            "y": 24.5
+          }
+        },
+        {
+          "id": "dndnode_5",
+          "type": "output",
+          "position": {
+            "x": 191,
+            "y": 100
+          },
+          "data": {
+            "label": "Red ",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#FF9D92",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 191,
+            "y": 100
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_6",
+          "type": "output",
+          "position": {
+            "x": 93.5,
+            "y": 100
+          },
+          "data": {
+            "label": "Onay ",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#8DA13B",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 93.5,
+            "y": 100
+          },
+          "dragging": false
+        }
+      ],
+      "edges": [
+        {
+          "source": "dndnode_0",
+          "sourceHandle": null,
+          "target": "dndnode_1",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_0-dndnode_1",
+          "animated": false
+        },
+        {
+          "source": "dndnode_1",
+          "sourceHandle": null,
+          "target": "dndnode_3",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_1-dndnode_3",
+          "animated": false,
+          "selected": false,
+          "data": {
+            "state": "maliyet < 100.000"
+          }
+        },
+        {
+          "source": "dndnode_1",
+          "sourceHandle": null,
+          "target": "dndnode_2",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_1-dndnode_2",
+          "animated": false,
+          "selected": false,
+          "data": {
+            "state": "maliyet < 100.000"
+          }
+        },
+        {
+          "source": "dndnode_1",
+          "sourceHandle": null,
+          "target": "dndnode_4",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_1-dndnode_4",
+          "animated": false,
+          "selected": false,
+          "data": {
+            "state": ""
+          }
+        },
+        {
+          "source": "dndnode_4",
+          "sourceHandle": null,
+          "target": "dndnode_6",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_4-dndnode_6",
+          "animated": false,
+          "selected": false,
+          "data": {
+            "state": "maliyet < 150.000"
+          }
+        },
+        {
+          "source": "dndnode_4",
+          "sourceHandle": null,
+          "target": "dndnode_5",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_4-dndnode_5",
+          "animated": false,
+          "selected": false,
+          "data": {
+            "state": "maliyet >=150.000"
+          }
+        },
+        {
+          "source": "dndnode_4",
+          "sourceHandle": null,
+          "target": "dndnode_1",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_4-dndnode_1",
+          "animated": false,
+          "data": {
+            "state": ""
+          }
+        }
+      ]
     }
   ]
 }

@@ -49,6 +49,9 @@ export default function App() {
       const updatedEdges = oldEdges.map((edge) => ({
         ...edge,
         animated: true,
+        arrowHeadType: 'arrow',
+        markerStart: 'myCustomSvgMarker', // markerStart özelliğini ekleyin
+        markerEnd: { type: 'arrow', color: 'white' } // markerEnd özelliğini ekleyin
       }));
       return updatedEdges;
     });
