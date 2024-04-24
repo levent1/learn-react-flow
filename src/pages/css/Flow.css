@@ -80,10 +80,11 @@ select {
   box-sizing: border-box;
   /* Padding'i hesaba katarak boyutu ayarlamak için */
 }
-*****************************************************
-.dndflow {
+
+***************************************************** .dndflow {
   display: flex;
-  flex-direction: row; /* Düğüm akışının dikey olarak olmasını sağlar */
+  flex-direction: row;
+  /* Düğüm akışının dikey olarak olmasını sağlar */
 
 }
 
@@ -95,9 +96,12 @@ select {
 }
 
 .dndflow .tools {
-  display: flex; /* Araç çubuğunun yatayda sıralanmasını sağlar */
-  justify-content: flex-end; /* Araç çubuğunun sağa yaslanmasını sağlar */
-  padding: 10px; /* Boşluk ekleyin */
+  display: flex;
+  /* Araç çubuğunun yatayda sıralanmasını sağlar */
+  justify-content: flex-end;
+  /* Araç çubuğunun sağa yaslanmasını sağlar */
+  padding: 10px;
+  /* Boşluk ekleyin */
 }
 
 .dndflow .dndnode {
@@ -113,72 +117,94 @@ select {
   color: white;
   height: 25px;
   width: 100px;
-  margin: 10px 10px; ;
+  margin: 10px 10px;
+  ;
   background-color: #D3B1EE;
 }
 
 .dndflow .dndnode.input {
-  
+
   height: 25px;
   width: 100px;
-  margin: 10px 10px; ;
+  margin: 10px 10px;
+  ;
   color: white;
   background-color: #FBBB89;
 }
 
 .dndflow .dndnode.output-reject {
-  
+
   height: 50px;
   width: 50px;
-  margin: 10px 10px; ;
+  margin: 10px 10px;
+  ;
   color: white;
-  background-color:#FF9D92 ;
+  background-color: #FF9D92;
   border-radius: 50%;
 }
 
 .dndflow .dndnode.output-accept {
-  
+
   height: 50px;
   width: 50px;
-  margin: 10px 10px; ;
+  margin: 10px 10px;
+  ;
   color: white;
-  background-color:#8DA13B ;
+  background-color: #8DA13B;
   border-radius: 50%;
 }
 
 .dndflow .reactflow-wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-between; /* Aracılar çubuğu ile akış arasında boşluk ekler */
+  justify-content: space-between;
+  /* Aracılar çubuğu ile akış arasında boşluk ekler */
 }
 
 .dndflow .selectall {
   margin-top: 10px;
 }
-.react-flow__renderer{
+
+.react-flow__renderer {
   height: 100px;
 
 }
 
-.logo{
+.logo {
   width: 200px;
   margin-right: 30px;
-  margin-left: 10px ;
+  margin-left: 10px;
+}
+
+.fixed-bottom-left {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}
+
+.fixed-bottom-right {
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
 }
 
 .react-flow__node.selected {
-  border: 2px solid red; /* Seçilen düğümün kenarını kırmızı olarak belirginleştirir */
+  border: 2px solid red;
+  /* Seçilen düğümün kenarını kırmızı olarak belirginleştirir */
 }
 
 .react-flow__edge.selected {
-  stroke: red; /* Seçilen kenarın rengini kırmızı olarak belirginleştirir */
-  stroke-width: 3px; /* Seçilen kenarın kalınlığını arttırır */
+  stroke: red;
+  /* Seçilen kenarın rengini kırmızı olarak belirginleştirir */
+  stroke-width: 3px;
+  /* Seçilen kenarın kalınlığını arttırır */
 }
 
 
 @media screen and (min-width: 768px) {
   .dndflow {
-    flex-direction: row; /* Ekran genişliği 768 pikselden büyükse, düğüm akışının yatay olarak olmasını sağlar */
+    flex-direction: row;
+    /* Ekran genişliği 768 pikselden büyükse, düğüm akışının yatay olarak olmasını sağlar */
   }
 
 }

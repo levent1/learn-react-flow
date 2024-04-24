@@ -328,7 +328,7 @@ export default function App() {
 
 
   return (
-    <div className="dndflow" style={{ width: '100vw', height: '100vh' }} >
+    <div className="dndflow" style={{ width: '98  vw', height: '90vh', position: 'relative' }} >
       <ReactFlowProvider>
         <div className="reactflow-wrapper" ref={reactFlowWrapper}>
           <aside>
@@ -474,14 +474,16 @@ export default function App() {
               );
             })}
           </div>
-          <Controls />
-          <MiniMap />
-          <Background variant="dots" gap={12} size={1} />
+          <div className="fixed-bottom-left">
+            <Controls />
+          </div>
+          <div className="fixed-bottom-right">
+            <MiniMap />
+          </div>
           <NodeToolbar />
+          <Background variant="dots" gap={12} size={1} />
         </ReactFlow>
       </ReactFlowProvider>
     </div>
   );
-
-
 }
