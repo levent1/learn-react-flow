@@ -189,7 +189,8 @@ select {
 }
 
 .react-flow__node.selected {
-  border: 2px solid red;
+  border: 2px dashed #6E94C2;
+  box-shadow: 0 0 50px 20px rgba(255, 255, 255, 0.7);
   /* Seçilen düğümün kenarını kırmızı olarak belirginleştirir */
 }
 
