@@ -180,12 +180,14 @@ select {
   position: fixed;
   bottom: 10px;
   left: 10px;
+  z-index: 1000;
 }
 
 .fixed-bottom-right {
   position: fixed;
   bottom: 0px;
   right: 0px;
+  z-index: 1000;
 }
 
 .react-flow__node.selected {

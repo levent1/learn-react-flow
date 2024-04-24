@@ -1,20 +1,18 @@
 {
   "flow": [
     {
-      "id": "f7f7",
+      "id": "8d98",
       "selectedOptionGeneral": "İzin Talebi",
       "nodes": [
         {
           "id": "dndnode_0",
           "type": "input",
           "position": {
-            "x": -78.5,
-            "y": -87.5
+            "x": -57,
+            "y": -206
           },
           "data": {
-            "label": "Başlangıç ",
-            "unit": "Muhasebe",
-            "toDo": "avans"
+            "label": "Başlangıç "
           },
           "style": {
             "backgroundColor": "#FBBB89",
@@ -24,8 +22,8 @@
           "height": 40,
           "selected": false,
           "positionAbsolute": {
-            "x": -78.5,
-            "y": -87.5
+            "x": -57,
+            "y": -206
           },
           "dragging": false
         },
@@ -33,13 +31,13 @@
           "id": "dndnode_1",
           "type": "default",
           "position": {
-            "x": -77.75,
-            "y": 0.75
+            "x": -55,
+            "y": -125
           },
           "data": {
-            "label": "İşlem ",
-            "unit": "Muhasebe",
-            "toDo": "2000"
+            "label": "Birincil Yönetici",
+            "unit": "Yazılım Gelişimi",
+            "toDo": "Proje onayı sağlanacaktır."
           },
           "style": {
             "backgroundColor": "#D3B1EE",
@@ -48,47 +46,21 @@
           "width": 150,
           "height": 40,
           "selected": false,
+          "positionAbsolute": {
+            "x": -55,
+            "y": -125
+          },
           "dragging": false
         },
         {
           "id": "dndnode_2",
           "type": "output",
           "position": {
-            "x": 16.25,
-            "y": 89.25
+            "x": -67,
+            "y": -36
           },
           "data": {
-            "label": "Red ",
-            "unit": "Muhasebe",
-            "toDo": ""
-          },
-          "style": {
-            "backgroundColor": "#FF9D92",
-            "borderRadius": "50%",
-            "width": "60px",
-            "height": "60px",
-            "paddingTop": "17px"
-          },
-          "width": 60,
-          "height": 60,
-          "selected": true,
-          "positionAbsolute": {
-            "x": 16.25,
-            "y": 89.25
-          },
-          "dragging": false
-        },
-        {
-          "id": "dndnode_3",
-          "type": "output",
-          "position": {
-            "x": -77.25,
-            "y": 88.25
-          },
-          "data": {
-            "label": "Onay ",
-            "unit": "Muhasebe",
-            "toDo": ""
+            "label": "Onay "
           },
           "style": {
             "backgroundColor": "#8DA13B",
@@ -101,24 +73,123 @@
           "height": 60,
           "selected": false,
           "positionAbsolute": {
-            "x": -77.25,
-            "y": 88.25
+            "x": -67,
+            "y": -36
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_3",
+          "type": "output",
+          "position": {
+            "x": 35,
+            "y": -33.5
+          },
+          "data": {
+            "label": "Red "
+          },
+          "style": {
+            "backgroundColor": "#FF9D92",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 35,
+            "y": -33.5
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_5",
+          "type": "default",
+          "position": {
+            "x": 125,
+            "y": -35
+          },
+          "data": {
+            "label": "İkincil Yönetici",
+            "unit": "Yazılım Gelişimi",
+            "toDo": "Birinci yönetici inisiyatif alarak ikincil yöneticiye iletiyor."
+          },
+          "style": {
+            "backgroundColor": "#D3B1EE",
+            "borderRadius": "0%"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 125,
+            "y": -35
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_6",
+          "type": "output",
+          "position": {
+            "x": 122,
+            "y": 60.5
+          },
+          "data": {
+            "label": "Onay "
+          },
+          "style": {
+            "backgroundColor": "#8DA13B",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 122,
+            "y": 60.5
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_7",
+          "type": "output",
+          "position": {
+            "x": 231.5,
+            "y": 59
+          },
+          "data": {
+            "label": "Red "
+          },
+          "style": {
+            "backgroundColor": "#FF9D92",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 231.5,
+            "y": 59
           },
           "dragging": false
         }
       ],
       "edges": [
         {
-          "source": "dndnode_1",
+          "source": "dndnode_0",
           "sourceHandle": null,
-          "target": "dndnode_3",
+          "target": "dndnode_1",
           "targetHandle": null,
-          "id": "reactflow__edge-dndnode_1-dndnode_3",
-          "animated": true,
-          "selected": false,
-          "data": {
-            "state": "o k"
-          }
+          "id": "reactflow__edge-dndnode_0-dndnode_1",
+          "animated": true
         },
         {
           "source": "dndnode_1",
@@ -129,20 +200,64 @@
           "animated": true,
           "selected": false,
           "data": {
-            "state": "red k"
+            "state": "maliyet < 100.000"
           }
         },
         {
-          "source": "dndnode_0",
+          "source": "dndnode_1",
           "sourceHandle": null,
-          "target": "dndnode_1",
+          "target": "dndnode_3",
           "targetHandle": null,
-          "id": "reactflow__edge-dndnode_0-dndnode_1",
+          "id": "reactflow__edge-dndnode_1-dndnode_3",
           "animated": true,
           "selected": false,
           "data": {
-            "state": "b i k"
+            "state": "maliyet > 100.000"
           }
+        },
+        {
+          "source": "dndnode_1",
+          "sourceHandle": null,
+          "target": "dndnode_5",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_1-dndnode_5",
+          "animated": true,
+          "selected": true,
+          "data": {
+            "state": ""
+          }
+        },
+        {
+          "source": "dndnode_5",
+          "sourceHandle": null,
+          "target": "dndnode_6",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_5-dndnode_6",
+          "animated": true,
+          "selected": false,
+          "data": {
+            "state": "maliyet < 150.000"
+          }
+        },
+        {
+          "source": "dndnode_5",
+          "sourceHandle": null,
+          "target": "dndnode_7",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_5-dndnode_7",
+          "animated": true,
+          "selected": false,
+          "data": {
+            "state": "maliyet >= 150.000"
+          }
+        },
+        {
+          "source": "dndnode_5",
+          "sourceHandle": null,
+          "target": "dndnode_1",
+          "targetHandle": null,
+          "id": "reactflow__edge-dndnode_5-dndnode_1",
+          "animated": true
         }
       ]
     }

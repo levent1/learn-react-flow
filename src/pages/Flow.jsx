@@ -305,8 +305,6 @@ export default function App() {
           break;
       }
 
-
-
       const newNode = {
         id: getId(),
         type,
@@ -478,7 +476,7 @@ export default function App() {
             <Controls />
           </div>
           <div className="fixed-bottom-right">
-            <MiniMap />
+            <MiniMap pannable zoomable />
           </div>
           <NodeToolbar />
           <Background variant="dots" gap={12} size={1} />
