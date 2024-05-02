@@ -178,21 +178,21 @@ select {
 
 .fixed-bottom-left {
   position: fixed;
-  bottom: 10px;
+  bottom: 100px;
   left: 10px;
   z-index: 1000;
 }
 
 .fixed-bottom-right {
   position: fixed;
-  bottom: 0px;
-  right: 0px;
+  bottom: 100px;
+  right: 10px;
   z-index: 1000;
 }
 
 .react-flow__node.selected {
   border: 2px dashed #6E94C2;
-  box-shadow: 0 0 50px 20px rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.7);
   /* Seçilen düğümün kenarını kırmızı olarak belirginleştirir */
 }
 

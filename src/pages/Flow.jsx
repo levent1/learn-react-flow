@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect, useRef } from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
 import ReactFlow, {
   ReactFlowProvider,
   MiniMap,
@@ -9,31 +9,45 @@ import ReactFlow, {
   NodeToolbar,
   addEdge,
 } from 'reactflow';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Alert from '@mui/material/Alert';
+import CheckIcon from '@mui/icons-material/Check';
+import Select from '@mui/material/Select';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import AdbIcon from '@mui/icons-material/Adb';
 import axios from 'axios';
 import 'reactflow/dist/style.css';
 import './css/Flow.css';
 
-
-
-const initialNodes = []
-
+const initialNodes = [];
 const initialEdges = [];
 
 export default function App() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  /*const [idCreate, setidCreate] = useState(3);*/
   const [selectedNode, setSelectedNode] = useState(null);
   const [selectedEdge, setSelectedEdge] = useState(null);
   const [selectedOptionGeneral, setSelectedOptionGeneral] = useState('İzin Talebi');
-  const [selectedOption, setSelectedOption] = useState('İzin talebi');
+  const [selectedOption, setSelectedOption] = useState('');
   const [nodeName, setNodeName] = useState('');
   const [infoBlockVisible, setInfoBlockVisible] = useState(false);
   const [infoEdgeBlockVisible, setInfoEdgeBlockVisible] = useState(false);
   const [taskDescription, setTaskDescription] = useState('');
+  const [nodeIfStatement, setNodeIfStatement] = useState('');
   const infoBlockRef = useRef(null);
   const infoBlockEdgeRef = useRef(null);
-  const [nodeIfStatement, setNodeIfStatement] = useState('');
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
@@ -48,25 +62,15 @@ export default function App() {
     setEdges((oldEdges) => {
       const updatedEdges = oldEdges.map((edge) => ({
         ...edge,
-        animated: true,
+        animated: false,
         arrowHeadType: 'arrow',
         markerStart: 'myCustomSvgMarker', // markerStart özelliğini ekleyin
-        markerEnd: { type: 'arrow', color: 'white' } // markerEnd özelliğini ekleyin
+        markerEnd: { type: 'arrow', color: 'black' }, // markerEnd özelliğini ekleyin
       }));
       return updatedEdges;
     });
   }, [edges, setEdges]);
 
-  /*const addNode = useCallback(() => {
-    setidCreate(idCreate => idCreate + 1);
-    const newNode = {
-      id: String(idCreate),
-      position: { x: 0, y: 0 },
-      data: { label: String(idCreate) }
-    };
-    setNodes(prevNodes => [...prevNodes, newNode]);
-  }, [idCreate, setNodes]);
-*/
   const handleNodeClick = (event, node) => {
     setSelectedNode(node);
     setInfoBlockVisible(true);
@@ -83,50 +87,44 @@ export default function App() {
     setSelectedOption(node.data.unit);
     setTaskDescription(node.data.toDo || '');
     console.log('Tıklanan Düğüm:', node);
-
   };
 
-  // Tıklanan kenarı işaretle
   const handleEdgeClick = (event, edge) => {
     if (selectedEdge && selectedEdge.id === edge.id) {
-      // Zaten seçili edge'e tıklandıysa, seçimi iptal et
       setSelectedEdge(null);
       setInfoEdgeBlockVisible(false);
     } else {
-      // Başka bir edge'e tıklandıysa, yeni edge'i seç ve diğer seçimleri temizle
       setSelectedEdge(edge);
       setInfoEdgeBlockVisible(true);
       setNodeIfStatement(edge.data?.state || '');
-      setSelectedNode(null); // Seçili düğümü temizle
-      setInfoBlockVisible(false); // Düğüm bilgi bloğunu gizle
+      setSelectedNode(null);
+      setInfoBlockVisible(false);
       console.log('Tıklanan Bağlantı:', edge);
     }
 
-    // Seçilen kenara "selected" sınıfını ekle
     event.target.classList.add('selected');
   };
 
   const handleEdgeIfStatementDoubleClick = (event, edge) => {
     if (selectedEdge && selectedEdge.id === edge.id) {
-      // Zaten seçili edge'e çift tıklandıysa, seçimi iptal et
       setSelectedEdge(null);
       setInfoEdgeBlockVisible(false);
     } else {
-      // Başka bir edge'e çift tıklandıysa, yeni edge'i seç ve diğer seçimleri temizle
       setSelectedEdge(edge);
       setInfoEdgeBlockVisible(true);
       setNodeIfStatement(edge.data?.state || '');
-      setSelectedNode(null); // Seçili düğümü temizle
-      setInfoBlockVisible(false); // Düğüm bilgi bloğunu gizle
+      setSelectedNode(null);
+      setInfoBlockVisible(false);
       console.log('Çift Tıklanan Bağlantı:', edge);
     }
   };
+
   const deleteNode = useCallback(() => {
     if (selectedNode) {
       const nodeId = selectedNode.id;
-      const filteredNodes = nodes.filter(node => node.id !== nodeId);
+      const filteredNodes = nodes.filter((node) => node.id !== nodeId);
       setNodes(filteredNodes);
-      onNodesChange(filteredNodes); // Düğümleri güncelle
+      onNodesChange(filteredNodes);
       setSelectedNode(null);
       setInfoBlockVisible(false);
       console.log('Node silindi');
@@ -134,9 +132,9 @@ export default function App() {
 
     if (selectedEdge) {
       const edgeId = selectedEdge.id;
-      const filteredEdges = edges.filter(edge => edge.id !== edgeId);
+      const filteredEdges = edges.filter((edge) => edge.id !== edgeId);
       setEdges(filteredEdges);
-      onEdgesChange(filteredEdges); // Kenarları güncelle
+      onEdgesChange(filteredEdges);
       setSelectedEdge(null);
       setInfoEdgeBlockVisible(false);
       console.log('Edge silindi');
@@ -145,72 +143,77 @@ export default function App() {
     if (!selectedNode && !selectedEdge) {
       console.log('Silinecek bir düğüm veya bağlantı seçilmedi');
     }
-  }, [nodes, edges, selectedNode, selectedEdge, onNodesChange, onEdgesChange, setNodes, setEdges, setSelectedNode, setSelectedEdge, setInfoBlockVisible, setInfoEdgeBlockVisible]);
+  }, [
+    nodes,
+    edges,
+    selectedNode,
+    selectedEdge,
+    onNodesChange,
+    onEdgesChange,
+    setNodes,
+    setEdges,
+    setSelectedNode,
+    setSelectedEdge,
+    setInfoBlockVisible,
+    setInfoEdgeBlockVisible,
+  ]);
 
   const handeleChangeDropdownGeneral = (event) => {
     setSelectedOptionGeneral(event.target.value);
   };
+
   const handleTaskDescriptionChange = (event) => {
     const newDescription = event.target.value;
     setTaskDescription(newDescription);
-    updateNodeInfo(nodeName, selectedOption, newDescription); // Node ismi, seçilen opsiyon ve görev açıklamasını güncelle
+    updateNodeInfo(nodeName, selectedOption, newDescription);
   };
 
   const handleSelectedOptionChange = (event) => {
     const newOption = event.target.value;
-    setSelectedOption(newOption);
+    setSelectedOptionGeneral(newOption);
     updateNodeInfo(nodeName, newOption, taskDescription); // Node ismi, seçilen opsiyon ve görev açıklamasını güncelle
   };
 
   const handleNodeNameChange = (event) => {
     const newName = event.target.value;
     setNodeName(newName);
-    updateNodeInfo(newName, selectedOption, taskDescription); // Node ismi, seçilen opsiyon ve görev açıklamasını güncelle
+    updateNodeInfo(newName, selectedOption, taskDescription);
   };
 
   const handleNodeIfStatementChange = (event) => {
     const nodeIfStatement = event.target.value;
     setNodeIfStatement(nodeIfStatement);
-    updateNodeIfStatementInfo(nodeIfStatement); // Node ismi, seçilen opsiyon ve görev açıklamasını güncelle
+    updateNodeIfStatementInfo(nodeIfStatement);
   };
 
   const handleOutsideClick = (event) => {
-    console.log("handleOutsideClick çalıştı");
-
-    // infoBlockRef ve infoBlockEdgeRef içerisinde herhangi bir yerde tıklanıp tıklanmadığını kontrol et
     if (
       (infoBlockRef.current && !infoBlockRef.current.contains(event.target) && infoBlockVisible) ||
       (infoBlockEdgeRef.current && !infoBlockEdgeRef.current.contains(event.target) && infoEdgeBlockVisible)
     ) {
-      console.log("info block dışında bir yere tıklandı");
-      // infoBlockVisible ve infoEdgeBlockVisible durumlarını güncelle
       if (infoBlockVisible) {
-
         updateNodeInfo(nodeName, selectedOption, taskDescription);
         setInfoBlockVisible(false);
-
       }
       if (infoEdgeBlockVisible) {
-
         updateNodeIfStatementInfo(nodeIfStatement);
         setInfoEdgeBlockVisible(false);
       }
     }
   };
 
-
   const updateNodeInfo = (newName, newOption, newDescription) => {
-    if (selectedNode) { // selectedNode null değilse devam et
-      const updatedNodes = nodes.map(n => {
+    if (selectedNode) {
+      const updatedNodes = nodes.map((n) => {
         if (n.id === selectedNode.id) {
           return {
             ...n,
             data: {
               ...n.data,
               label: newName,
-              unit: newOption, // selectedOption değerini güncelle
-              toDo: newDescription // taskDescription değerini güncelle
-            }
+              unit: newOption,
+              toDo: newDescription,
+            },
           };
         }
         return n;
@@ -220,15 +223,15 @@ export default function App() {
   };
 
   const updateNodeIfStatementInfo = (nodeIfStatement) => {
-    if (selectedEdge) { // selectedNode null değilse devam et
-      const updatedEdges = edges.map(edge => {
+    if (selectedEdge) {
+      const updatedEdges = edges.map((edge) => {
         if (edge.id === selectedEdge.id) {
           return {
             ...edge,
             data: {
               ...edge.data,
-              state: nodeIfStatement
-            }
+              state: nodeIfStatement,
+            },
           };
         }
         return edge;
@@ -236,12 +239,17 @@ export default function App() {
       setEdges(updatedEdges);
     }
   };
+
   const handleSave = async () => {
     try {
       const response = await axios.post('http://localhost:3000/flow', { selectedOptionGeneral, nodes, edges });
-      console.log('Veriler başarıyla kaydedildi:', response.data);
+      return (<Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+        Veriler Başarı İle Kaydedildi.
+      </Alert>)
     } catch (error) {
-      console.error('Verileri kaydetme hatası:', error);
+      <Alert icon={<CheckIcon fontSize="inherit" />} severity="error">
+        Veriler Kaydedilemedi {error}
+      </Alert>
     }
   };
 
@@ -258,29 +266,24 @@ export default function App() {
       event.preventDefault();
 
       const type = event.dataTransfer.getData('application/reactflow');
-      const nodeClass = event.dataTransfer.getData('application/nodeclass'); // Sürüklenen öğenin sınıfını al
+      const nodeClass = event.dataTransfer.getData('application/nodeclass');
       const nodelabel = event.dataTransfer.getData('application/nodelabel');
-      // check if the dropped element is valid
+
       if (typeof type === 'undefined' || !type) {
         return;
       }
 
-      // reactFlowInstance.project was renamed to reactFlowInstance.screenToFlowPosition
-      // and you don't need to subtract the reactFlowBounds.left/top anymore
-      // details: https://reactflow.dev/whats-new/2023-11-10
       const position = reactFlowInstance.screenToFlowPosition({
         x: event.clientX,
         y: event.clientY,
       });
 
       let backgroundColor = 'white';
-      let borderRadius = '0%'
+      let borderRadius = '0%';
       let width;
       let height;
       let paddingTop;
 
-
-      // Check node class and set background color accordingly
       switch (nodeClass) {
         case 'dndnode input':
           backgroundColor = '#FBBB89';
@@ -293,15 +296,14 @@ export default function App() {
           borderRadius = '50%';
           width = '60px';
           height = '60px';
-          paddingTop = "17px"
+          paddingTop = '17px';
           break;
         case 'dndnode output-accept':
           backgroundColor = '#8DA13B';
           borderRadius = '50%';
           width = '60px';
           height = '60px';
-          paddingTop = "17px"
-
+          paddingTop = '17px';
           break;
         default:
           backgroundColor = '#D3B1EE';
@@ -313,7 +315,7 @@ export default function App() {
         type,
         position,
         data: { label: `${nodelabel} ` },
-        style: { backgroundColor, borderRadius, width, height, paddingTop }
+        style: { backgroundColor, borderRadius, width, height, paddingTop },
       };
 
       setNodes((nds) => nds.concat(newNode));
@@ -327,13 +329,157 @@ export default function App() {
   };
 
 
+  const pages = ['Products', 'Pricing', 'Blog'];
+  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+  
 
   return (
-    <div className="dndflow" style={{ width: '98  vw', height: '90vh', position: 'relative' }} >
+    <div className="dndflow" style={{ width: '98  vw', height: '90vh', position: 'relative' }}>
+
+      <AppBar position="static" style={{ backgroundColor: 'white' }}>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <img src="src\pages\logo.png" alt="Bilge Adam Teknoloji Logo" className="logo" />
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'black',
+                textDecoration: 'none',
+              }}
+            >
+            </Typography>
+
+            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleOpenNavMenu}
+                color="black"
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorElNav}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'left',
+                }}
+                open={Boolean(anchorElNav)}
+                onClose={handleCloseNavMenu}
+                sx={{
+                  display: { xs: 'block', md: 'none' },
+                }}
+              >
+                {pages.map((page) => (
+                  <MenuItem key={page} onClick={handleCloseNavMenu}>
+                    <Typography textAlign="center" sx={{ color: 'black' }}>
+                      {page}
+                    </Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href="#app-bar-with-responsive-menu"
+              sx={{
+                mr: 2,
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+              }}
+            >
+              LOGO
+            </Typography>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+              {pages.map((page) => (
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  {page}
+                </Button>
+              ))}
+            </Box>
+
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
       <ReactFlowProvider>
         <div className="reactflow-wrapper" ref={reactFlowWrapper}>
           <aside>
-            <img src="src\pages\logo.png" alt="Bilge Adam Teknoloji Logo" className='logo' />
             <div
               className="dndnode input"
               onDragStart={(event) => {
@@ -343,7 +489,7 @@ export default function App() {
                 onDragStart(event, 'input');
               }}
               draggable
-              data-nodeclass="input" // Bu satırı ekleyerek nodeClass verisini taşıyoruz
+              data-nodeclass="input"
             >
               Başlangıç
             </div>
@@ -356,7 +502,7 @@ export default function App() {
                 onDragStart(event, 'default');
               }}
               draggable
-              data-nodeclass="default" // Bu satırı ekleyerek nodeClass verisini taşıyoruz
+              data-nodeclass="default"
             >
               İşlem
             </div>
@@ -369,7 +515,7 @@ export default function App() {
                 onDragStart(event, 'output');
               }}
               draggable
-              data-nodeclass="output-reject" // Bu satırı ekleyerek nodeClass verisini taşıyoruz
+              data-nodeclass="output-reject"
             >
               Red
             </div>
@@ -382,17 +528,19 @@ export default function App() {
                 onDragStart(event, 'output');
               }}
               draggable
-              data-nodeclass="output-accept" // Bu satırı ekleyerek nodeClass verisini taşıyoruz
+              data-nodeclass="output-accept"
             >
               Onay
             </div>
-
           </aside>
-          <div className='tools'>
-            {/* <button className='btn' onClick={addNode}>Node Ekle</button> */}
-            <button className='btn' onClick={deleteNode}>Sil</button>
-            <button className='btn' onClick={handleSave}>Kaydet</button>
-            <select className='dropdown' value={selectedOptionGeneral} onChange={handeleChangeDropdownGeneral}>
+          <div className="tools">
+            <Button variant="outlined" color="error" onClick={deleteNode} size='small'>
+              Sil
+            </Button>{' '}
+            <Button variant="contained" color="success" onClick={handleSave} size='large'>
+              Kaydet
+            </Button>{' '}
+            <select className="dropdown" value={selectedOptionGeneral} onChange={handeleChangeDropdownGeneral}>
               <option value="İzin Talebi">İzin Talebi</option>
               <option value="Eğitim Talebi"> Eğitim Talebi</option>
               <option value="Avans Talebi"> Avans Talebi</option>
@@ -400,7 +548,8 @@ export default function App() {
             </select>
           </div>
         </div>
-        <ReactFlow className='react-flow-css'
+        <ReactFlow
+          className="react-flow-css"
           nodes={nodes}
           edges={edges}
           onNodesChange={onNodesChange}
@@ -416,76 +565,80 @@ export default function App() {
           onDragOver={onDragOver}
           onClick={handleOutsideClick}
           fitView
-
         >
-          <div className='info' style={{ position: 'absolute', display: infoBlockVisible ? 'block' : 'none' }}>
-            {nodes.map(node => (
-              <div key={node.id} style={{}}>
+          <div className="info" style={{ position: 'absolute', display: infoBlockVisible ? 'block' : 'none' }}>
+            {nodes.map((node) => (
+              <div key={node.id} >
                 {node.id === selectedNode?.id && (
-                  <div className='infoblock' ref={infoBlockRef}>
-                    <label >İsim: </label>
-                    <input
-                      type="text"
-                      value={nodeName}
+                  <div className="infoblock" ref={infoBlockRef}>
+
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Düğüm Adı"
+                      defaultValue={node.data.label}
+                      variant="outlined"
+                      className="node-name"
                       onChange={handleNodeNameChange}
-                      placeholder='Noda isim ver'
                     />
-                    <label >İlgili Birim: </label>
-                    <select
-                      className='active_unit'
+                    <InputLabel id="demo-simple-select-label">Birim</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
                       value={selectedOption}
+                      label="Birim"
                       onChange={handleSelectedOptionChange}
+                      defaultValue='Seçiniz'
+                      className="dropdown"
                     >
-                      <option value="">Seçiniz</option>
-                      <option value='Yazılım Gelişimi'>Yazılım Geliştirme</option>
-                      <option value='Muhasebe'>Muhasebe</option>
-                      <option value='İnsan Kaynakları'>İnsan kaynakları</option>
-                    </select>
-                    <label >İlgili Not(Var ise): </label>
-                    <textarea
-                      name="text-area"
-                      placeholder='Yapılacak işlem Açıklaması ekle'
-                      value={taskDescription}
+                      <MenuItem value="">
+                        <em>Seçiniz</em>
+                      </MenuItem>
+                      <MenuItem value="İzin Talebi">İzin Talebi</MenuItem>
+                      <MenuItem value="Eğitim Talebi"> Eğitim Talebi</MenuItem>
+                      <MenuItem value="Avans Talebi"> Avans Talebi</MenuItem>
+                      <MenuItem value="Harcama Talebi">Harcama Talebi</MenuItem>
+                    </Select>
+                    <TextField
+                      id="outlined-multiline-static"
+                      label="Açıklama"
+                      multiline
+                      rows={4}
+                      defaultValue={node.data.toDo || ''}
+                      variant="outlined"
+                      fullWidth
+                      className="task-description"
                       onChange={handleTaskDescriptionChange}
-                    ></textarea>
+                    />
                   </div>
                 )}
               </div>
             ))}
           </div>
-
-          <div className='info-edge' style={{ position: 'absolute', display: infoEdgeBlockVisible ? 'block' : 'none' }}>
-            {edges.map(edge => {
-              const selectedNode = nodes.find(node => node.id === edge.source);
-              if (!selectedNode) return null; // Eğer kaynak düğüm bulunamazsa, işlemi durdur
-              return (
-                <div key={edge.id} >
-                  {edge.id === selectedEdge?.id && (
-                    <div className='infoblock-edge' ref={infoBlockEdgeRef}>
-                      <label >Koşulu Belirleyiniz: </label>
-                      <input
-                        type="text"
-                        value={nodeIfStatement ? nodeIfStatement : ""}
-                        onChange={handleNodeIfStatementChange}
-                        placeholder='Koşulu Belirle'
-                      />
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+          <div className="info" style={{ position: 'absolute', display: infoEdgeBlockVisible ? 'block' : 'none' }}>
+            {edges.map((edge) => (
+              <div key={edge.id} style={{}}>
+                {edge.id === selectedEdge?.id && (
+                  <div className="infoblock" ref={infoBlockEdgeRef}>
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Eğer Durum"
+                      defaultValue={edge.data?.state || ''}
+                      variant="outlined"
+                      className="node-if-statement"
+                      onChange={handleNodeIfStatementChange}
+                    />
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-          <div className="fixed-bottom-left">
-            <Controls />
-          </div>
-          <div className="fixed-bottom-right">
-            <MiniMap pannable zoomable />
-          </div>
-          <NodeToolbar />
-          <Background variant="dots" gap={12} size={1} />
+          <Controls />
+          <MiniMap />
+          <Background />
         </ReactFlow>
       </ReactFlowProvider>
     </div>
   );
-
 }
