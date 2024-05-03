@@ -9,6 +9,7 @@ import ReactFlow, {
   NodeToolbar,
   addEdge,
 } from 'reactflow';
+import classNames from 'classnames';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -50,7 +51,7 @@ export default function App() {
   const infoBlockEdgeRef = useRef(null);
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-
+  const options = ["", "İzin Talebi", "Eğitim Talebi", "Avans Talebi", "Harcama Talebi"];
   const onConnect = useCallback(
     (connection) => {
       setEdges((oldEdges) => addEdge(connection, oldEdges));
@@ -315,7 +316,14 @@ export default function App() {
         type,
         position,
         data: { label: `${nodelabel} ` },
-        style: { backgroundColor, borderRadius, width, height, paddingTop },
+        style: {
+          backgroundColor, borderRadius, width, height, paddingTop, className: classNames({
+            'dndnode input': nodeClass === 'dndnode input',
+            'dndnode': nodeClass === 'dndnode',
+            'dndnode output-reject': nodeClass === 'dndnode output-reject',
+            'dndnode output-accept': nodeClass === 'dndnode output-accept',
+          })
+        },
       };
 
       setNodes((nds) => nds.concat(newNode));
@@ -349,30 +357,34 @@ export default function App() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  
+
+
+
 
   return (
-    <div className="dndflow" style={{ width: '98  vw', height: '90vh', position: 'relative' }}>
+    <div className="dndflow" style={{ width: '98  vw', height: '80vh', position: 'relative' }}>
 
       <AppBar position="static" style={{ backgroundColor: 'white' }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <img src="src\pages\logo.png" alt="Bilge Adam Teknoloji Logo" className="logo" />
             <Typography
-              variant="h6"
+              variant="h5"
               noWrap
               component="a"
               href="#app-bar-with-responsive-menu"
               sx={{
                 mr: 2,
-                display: { xs: 'none', md: 'flex' },
+                display: { xs: 'flex', md: 'none' },
+                flexGrow: 1,
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
-                color: 'black',
+                color: 'black', // Renk buraya eklenmeli
                 textDecoration: 'none',
               }}
             >
+              LOGO
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -591,13 +603,9 @@ export default function App() {
                       defaultValue='Seçiniz'
                       className="dropdown"
                     >
-                      <MenuItem value="">
-                        <em>Seçiniz</em>
-                      </MenuItem>
-                      <MenuItem value="İzin Talebi">İzin Talebi</MenuItem>
-                      <MenuItem value="Eğitim Talebi"> Eğitim Talebi</MenuItem>
-                      <MenuItem value="Avans Talebi"> Avans Talebi</MenuItem>
-                      <MenuItem value="Harcama Talebi">Harcama Talebi</MenuItem>
+                      {options.map((option) => (
+                        <MenuItem key={option} value={option}>{option}</MenuItem>
+                      ))}
                     </Select>
                     <TextField
                       id="outlined-multiline-static"
@@ -634,11 +642,28 @@ export default function App() {
               </div>
             ))}
           </div>
-          <Controls />
-          <MiniMap />
+          <div className="fixed-bottom-left">
+            <Controls />
+          </div>
+          <div className="fixed-bottom-right">
+            <MiniMap pannable zoomable nodeColor={(node) => {
+              switch (node.style.className) {
+                case 'dndnode input':
+                  return '#FBBB89'; // Input renk
+                case 'dndnode':
+                  return '#D3B1EE'; // Default renk
+                case 'dndnode output-reject':
+                  return '#FF9D92'; // Red renk
+                case 'dndnode output-accept':
+                  return '#8DA13B'; // Onay renk
+                default:
+                  return '#D3B1EE'; // Varsayılan renk
+              }
+            }} />
+          </div>
           <Background />
         </ReactFlow>
-      </ReactFlowProvider>
+      </ReactFlowProvider >
     </div>
   );
 }

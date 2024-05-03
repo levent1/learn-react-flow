@@ -251,6 +251,81 @@
           }
         }
       ]
+    },
+    {
+      "id": "0bbd",
+      "selectedOptionGeneral": "İzin Talebi",
+      "nodes": [
+        {
+          "id": "dndnode_0",
+          "type": "input",
+          "position": {
+            "x": 87.5,
+            "y": 12.5
+          },
+          "data": {
+            "label": "Başlangıç "
+          },
+          "style": {
+            "backgroundColor": "#FBBB89",
+            "borderRadius": "0%"
+          },
+          "width": 150,
+          "height": 40,
+          "selected": false,
+          "positionAbsolute": {
+            "x": 87.5,
+            "y": 12.5
+          },
+          "dragging": false
+        },
+        {
+          "id": "dndnode_1",
+          "type": "output",
+          "position": {
+            "x": 127.75,
+            "y": 122.5
+          },
+          "data": {
+            "label": "Red ",
+            "toDo": ""
+          },
+          "style": {
+            "backgroundColor": "#FF9D92",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
+          "selected": false,
+          "dragging": false
+        },
+        {
+          "id": "dndnode_2",
+          "type": "output",
+          "position": {
+            "x": 253.75,
+            "y": 142.5
+          },
+          "data": {
+            "label": "Onay "
+          },
+          "style": {
+            "backgroundColor": "#8DA13B",
+            "borderRadius": "50%",
+            "width": "60px",
+            "height": "60px",
+            "paddingTop": "17px"
+          },
+          "width": 60,
+          "height": 60,
+          "selected": true,
+          "dragging": false
+        }
+      ],
+      "edges": []
     }
   ]
 }
